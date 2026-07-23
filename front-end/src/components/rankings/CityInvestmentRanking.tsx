@@ -1,5 +1,5 @@
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
-import type { ICityInvestmentRanking } from '../types/city-investment-ranking'
+import type { ICityInvestmentRanking } from '../../types/city-investment-ranking'
 
 const columns: GridColDef<ICityInvestmentRanking>[] = [
   {
@@ -32,7 +32,7 @@ type Props = {
   data: ICityInvestmentRanking[];
 }
 
-export function Ranking({ data }: Props) {
+export function CityInvestmentRanking({ data }: Props) {
   return (
     <DataGrid
       columnHeaderHeight={40}
