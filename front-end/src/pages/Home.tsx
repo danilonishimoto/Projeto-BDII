@@ -4,8 +4,16 @@ import { HighlightCard } from "../components/HighlightCard";
 import City from '../assets/icons/city-blue.svg?react'
 import Money from '../assets/icons/money-blue.svg?react'
 import Service from '../assets/icons/services-blue.svg?react'
-import { Ranking } from "../components/Ranking";
+
+import { CityInvestmentRanking } from "../components/rankings/CityInvestmentRanking";
+import { CityServiceQuantityRanking } from "../components/rankings/CityServiceQuantityRanking";
+import { CompanyServiceRevenueRanking } from "../components/rankings/CompanyServiceRevenueRanking";
+import { CompanyServiceQuantityRanking } from "../components/rankings/CompanyServiceQuantityRanking";
+
+import { cityServiceQuantityRankingMock } from "../assets/mocks/cityServiceQuantityRankingMock";
 import { cityInvestmentRankingMock } from "../assets/mocks/cityInvestmentRankingMock";
+import { companyServiceRevenueRankingMock } from "../assets/mocks/companyServiceRevenueRankingMock"
+import { companyServiceQuantityRankingMock } from "../assets/mocks/companyServiceQuantityRankingMock";
 
 export function Home() {
   return (
@@ -48,7 +56,7 @@ export function Home() {
               <Typography style={{ padding: '16px 16px 4px 16px'}}>
                 Cidades com maior valor investido:
               </Typography>
-              <Ranking data={cityInvestmentRankingMock}/>
+              <CityInvestmentRanking data={cityInvestmentRankingMock}/>
             </Box>
           </Grid>
           <Grid size={6}>
@@ -73,19 +81,26 @@ export function Home() {
               <Typography>
                 Cidades x serviços:
               </Typography>
+              <CityServiceQuantityRanking data={cityServiceQuantityRankingMock}/>
             </Box>
           </Grid>
           <Grid size={6}>
             <Stack direction='row' spacing={2} sx={{ height: '100%' }}>
-              <Box className={styles.metric}>
+              <Box className={styles.metric} sx={{ gap: 1 }}>
                 <Typography>
                   Empresa x valor ganho
                 </Typography>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+                  <CompanyServiceRevenueRanking data={companyServiceRevenueRankingMock}/>
+                </Box>
               </Box>
-              <Box className={styles.metric}> 
+              <Box className={styles.metric} sx={{ gap: 0 }}> 
                 <Typography>
                   Empresas x serviço:
                 </Typography>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+                  <CompanyServiceQuantityRanking data={companyServiceQuantityRankingMock}/>
+                </Box>
               </Box>
             </Stack>
           </Grid>
