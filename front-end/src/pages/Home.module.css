@@ -1,0 +1,49 @@
+.home {
+  width: 100%;
+  height: 100vh;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  flex-shrink: 0;
+  height: fit-content;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.statistics {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.statisticsFirstRow {
+  flex: 6;
+  margin-bottom: 20px;
+}
+
+.statisticsSecondRow {
+  flex: 4;
+}
+
+.metric {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2;
+}
