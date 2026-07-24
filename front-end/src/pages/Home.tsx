@@ -9,11 +9,15 @@ import { CityInvestmentRanking } from "../components/rankings/CityInvestmentRank
 import { CityServiceQuantityRanking } from "../components/rankings/CityServiceQuantityRanking";
 import { CompanyServiceRevenueRanking } from "../components/rankings/CompanyServiceRevenueRanking";
 import { CompanyServiceQuantityRanking } from "../components/rankings/CompanyServiceQuantityRanking";
+import { CityServiceQuantityHistogram } from "../components/rankings/CityServiceQuantityHistogram";
+import { CityInvestmentHistogram } from "../components/rankings/CityInvestmentHistogram";
 
 import { cityServiceQuantityRankingMock } from "../assets/mocks/cityServiceQuantityRankingMock";
 import { cityInvestmentRankingMock } from "../assets/mocks/cityInvestmentRankingMock";
 import { companyServiceRevenueRankingMock } from "../assets/mocks/companyServiceRevenueRankingMock"
 import { companyServiceQuantityRankingMock } from "../assets/mocks/companyServiceQuantityRankingMock";
+import { cityInvestmentHistogramMock } from "../assets/mocks/cityInvestmentHistogramMock";
+import { cityServiceQuantityHistogramMock } from "../assets/mocks/cityServiceQuantityHistogramMock";
 
 export function Home() {
   return (
@@ -53,7 +57,7 @@ export function Home() {
         <Grid container className={styles.statisticsFirstRow} spacing={2}>
           <Grid size={6}>
             <Box className={styles.metric} style={{ padding: 0 }}>
-              <Typography style={{ padding: '16px 16px 4px 16px'}}>
+              <Typography style={{ padding: '16px 16px 16px 16px'}}>
                 Cidades com maior valor investido:
               </Typography>
               <CityInvestmentRanking data={cityInvestmentRankingMock}/>
@@ -65,10 +69,12 @@ export function Home() {
                 <Typography>
                   Serviços por cidade:
                 </Typography>
+                <CityServiceQuantityHistogram data={cityServiceQuantityHistogramMock}/>
               </Box>
               <Box className={styles.metric}>
-                <Typography>
+                <Typography sx={{ textAlign: 'left'}}>
                   Pagamentos por cidade:
+                  <CityInvestmentHistogram data={cityInvestmentHistogramMock}/>
                 </Typography>
               </Box>
             </Stack>
@@ -86,15 +92,15 @@ export function Home() {
           </Grid>
           <Grid size={6}>
             <Stack direction='row' spacing={2} sx={{ height: '100%' }}>
-              <Box className={styles.metric} sx={{ gap: 1 }}>
+              <Box className={styles.metric} sx={{ gap: 3 }}>
                 <Typography>
-                  Empresa x valor ganho
+                  Empresa x valor ganho:
                 </Typography>
                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
                   <CompanyServiceRevenueRanking data={companyServiceRevenueRankingMock}/>
                 </Box>
               </Box>
-              <Box className={styles.metric} sx={{ gap: 0 }}> 
+              <Box className={styles.metric} sx={{ gap: 4 }}> 
                 <Typography>
                   Empresas x serviço:
                 </Typography>

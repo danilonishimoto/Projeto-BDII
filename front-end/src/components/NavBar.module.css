@@ -1,7 +1,7 @@
 .nav {
   width: 240px;
   flex-shrink: 0;
-  height: calc(100vh - 40px);
+  height: calc(var(--page-height) - 40px);
   background-color: white;
   border-radius: 30px;
   display: flex;

@@ -6,8 +6,8 @@ type Props = {
 }
 
 const settings = {
-  width: 100,
-  height: 100,
+  width: 160,
+  height: 160,
   hideLegend: true,
   margin: {
     top: 0,
@@ -30,11 +30,11 @@ export function CompanyServiceRevenueRanking({ data }: Props) {
     <>
       <PieChart
         colors={[ '#C6F9FD', '#AED6FF', '#73AEFC', '#4D87F9', '#2563EB' ]}
-        series={[{ innerRadius: 25, outerRadius: 50, data: chartData, arcLabel: 'value' }]}
+        series={[{ innerRadius: 40, outerRadius: 80, data: chartData, arcLabel: 'value' }]}
         sx={{
           "& .MuiPieChart-arcLabel": {
-            fontSize: "8px",
-            fontWeight: "bold",
+            fontSize: "13px",
+            fontWeight: 500,
           }
         }}
         {...settings}
