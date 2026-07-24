@@ -11,6 +11,10 @@
   border-radius: 10px;
 }
 
+.active { 
+  background-color: var(--blue-300) !important;
+}
+
 .navItem:hover {
   cursor: pointer;
 }

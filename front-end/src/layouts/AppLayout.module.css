@@ -1,6 +1,7 @@
 .app {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: var(--page-height);
+  height: var(--page-height);
   padding: 20px;
   background-color: var(--background-primary);
   display: flex;

@@ -53,7 +53,7 @@ export function CityInvestmentRanking({ data }: Props) {
           borderTop: 'none',
         },
       }}
-      style={{ width: '100%' }}
+      style={{ width: '100%', borderRadius: '0px 0px 20px 20px' }}
       columns={columns}
       hideFooter={true}
       rows={data}

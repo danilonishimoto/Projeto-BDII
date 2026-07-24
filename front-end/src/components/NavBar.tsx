@@ -9,8 +9,21 @@ import City from '../assets/icons/city.svg?react'
 import Order from '../assets/icons/order.svg?react'
 import Service from '../assets/icons/service.svg?react'
 import { NavItem } from "./NavItem";
+import { useLocation, useNavigate } from "react-router";
 
 export function NavBar() {
+
+  const { pathname } = useLocation()
+
+  const navigate = useNavigate()
+
+  const toggleView = (route: string) => {
+    if(route === 'home')
+      navigate('/home') 
+    else
+      navigate(`/cadastro/${route}`, { replace: true})
+  }
+
   return (
     <Stack className={styles.nav}>
       <Box className={styles.user}>
@@ -25,7 +38,7 @@ export function NavBar() {
         <Typography>
           DASHBOARD
         </Typography>
-        <NavItem link='Home'>
+        <NavItem link='Home' toggleView={toggleView} activePath={pathname}>
           <SvgIcon component={Home}/>
         </NavItem>
       </Box>
@@ -33,23 +46,23 @@ export function NavBar() {
         <Typography>
           CADASTRO
         </Typography>
-        <NavItem link='Empresas'>
-          <SvgIcon component={Business}/>
-        </NavItem>
-        <NavItem link='Clientes'>
-          <SvgIcon component={Client}/>
-        </NavItem>
-        <NavItem link='Cidades'>
+        <NavItem link='Cidades' toggleView={toggleView} activePath={pathname}>
           <SvgIcon component={City}/>
         </NavItem>
-        <NavItem link='Serviços'>
-          <SvgIcon component={Service}/>
+        <NavItem link='Clientes' toggleView={toggleView} activePath={pathname}>
+          <SvgIcon component={Client}/>
         </NavItem>
-        <NavItem link='Pedidos'>
+        <NavItem link='Empresas' toggleView={toggleView} activePath={pathname}>
+          <SvgIcon component={Business}/>
+        </NavItem>
+        <NavItem link='Funcionários' toggleView={toggleView} activePath={pathname}>
+          <SvgIcon component={Employee}/>
+        </NavItem>
+        <NavItem link='Pedidos' toggleView={toggleView} activePath={pathname}>
           <SvgIcon component={Order}/>
         </NavItem>
-        <NavItem link='Funcionários'>
-          <SvgIcon component={Employee}/>
+        <NavItem link='Serviços' toggleView={toggleView} activePath={pathname}>
+          <SvgIcon component={Service}/>
         </NavItem>
       </Box>
     </Stack>

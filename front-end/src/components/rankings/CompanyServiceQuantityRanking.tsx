@@ -2,8 +2,8 @@ import { PieChart } from "@mui/x-charts"
 import type { ICompanyServiceQuantityRanking } from "../../types/company-service-quantity-ranking"
 
 const settings = {
-  width: 100,
-  height: 100,
+  width: 160,
+  height: 160,
   margin: {
     top: 0,
     bottom: 0,
@@ -34,7 +34,7 @@ export function CompanyServiceQuantityRanking({ data }: Props) {
           legend: {
             direction: 'vertical',
             sx: {
-              rowGap: '4px',
+              rowGap: '12px',
               '&.MuiChartsLegend-root': {
                 marginLeft: 2,
               },
@@ -43,14 +43,12 @@ export function CompanyServiceQuantityRanking({ data }: Props) {
         }}
         sx={{
           "& .MuiChartsLegend-label": {
-            fontSize: "8px",
+            fontSize: "14px",
+            textAlign: 'left'
           },
           "& .MuiChartsLegend-mark": {
-            width: "4px",
-            height: "4px",
-          },
-          '&.MuiChartsLegend-root': {
-            margin: 0,
+            width: "6px",
+            height: "6px",
           },
         }}
         {...settings}
