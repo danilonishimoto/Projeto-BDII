@@ -2,11 +2,8 @@ package com.mudancas.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDate;
 
 @Getter
@@ -35,9 +32,8 @@ public class Solicitam {
     @JoinColumn(name="servico_nome")
     private Servico servico;
 
-    @JdbcTypeCode(SqlTypes.INTERVAL_SECOND)
     @Column(name="tempo_duracao")
-    private Duration tempoDuracao;
+    private int tempoDuracao;
 
     @Column(name="preco")
     private BigDecimal preco;

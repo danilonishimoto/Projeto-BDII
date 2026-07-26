@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS SOLICITAM (
     servico_nome VARCHAR(40) NOT NULL,
     funcionario_cpf CHAR(11) NOT NULL,
     pedido_id INT NOT NULL,
-    tempo_duracao TIME DEFAULT '00:00:00',
+    tempo_duracao INT,
     preco NUMERIC(8, 2),
     carga NUMERIC(8, 2),
     data_finalizacao DATE,

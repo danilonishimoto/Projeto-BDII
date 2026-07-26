@@ -1,11 +1,8 @@
 package com.mudancas.dto;
 
 import lombok.*;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 
 @Getter
 @Setter
@@ -22,8 +19,7 @@ public class SolicitamResponseDto {
 
     private int pedidoId;
 
-    @JdbcTypeCode(SqlTypes.INTERVAL_SECOND)
-    private Duration tempoDuracao;
+    private int tempoDuracao;
 
     private BigDecimal carga;
 }
