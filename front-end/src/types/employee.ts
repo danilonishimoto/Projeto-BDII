@@ -1,9 +1,9 @@
 export type IEmployee = {
-  CPFFunc: string;
-  RGFunc: string;
-  enderecoFunc: string;
-  nomeComplFunc: string;
-  telefoneCont: number;
-  tipoFunc: string;
+  cpf: string;
+  rg: string;
+  endereco: string;
+  nome: string;
+  telefone: number;
+  tipo: string;
   salario: number
 }

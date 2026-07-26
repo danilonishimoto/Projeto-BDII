@@ -15,12 +15,12 @@ export function Employees() {
   const methods = useForm<IEmployee>({
     mode: "all",
     defaultValues: {
-      CPFFunc: '',
-      RGFunc: '',
-      enderecoFunc: '',
-      nomeComplFunc: '',
-      telefoneCont: 0,
-      tipoFunc: '',
+      cpf: '',
+      rg: '',
+      endereco: '',
+      nome: '',
+      telefone: 0,
+      tipo: '',
       salario: 0
     },
   });
@@ -67,7 +67,7 @@ export function Employees() {
             <form onSubmit={handleSubmit(handleCreateAndSend)}>
               <Stack spacing={3}>
                 <Controller
-                  name='CPFFunc'
+                  name='cpf'
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {
@@ -88,7 +88,7 @@ export function Employees() {
                 </Controller>
 
                 <Controller
-                  name='RGFunc'
+                  name='rg'
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {
@@ -109,7 +109,7 @@ export function Employees() {
                 </Controller>
 
                 <Controller
-                  name='enderecoFunc'
+                  name='endereco'
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {
@@ -130,7 +130,7 @@ export function Employees() {
                 </Controller>
 
                 <Controller
-                  name='nomeComplFunc'
+                  name='nome'
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {
@@ -151,7 +151,7 @@ export function Employees() {
                 </Controller>
 
                 <Controller
-                  name='telefoneCont'
+                  name='telefone'
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {
@@ -163,27 +163,6 @@ export function Employees() {
                           },
                         }}
                         label='Telefone'
-                        {...field}
-                        inputRef={field.ref}
-                      />
-                    )
-                  }}
-                >
-                </Controller>
-
-                <Controller
-                  name='nomeComplFunc'
-                  control={control}
-                  rules={{ required: "This field is required" }}
-                  render={({ field }) => {
-                    return (
-                      <TextField
-                        slotProps={{
-                          inputLabel: {
-                            shrink: true,
-                          },
-                        }}
-                        label='Nome completo'
                         {...field}
                         inputRef={field.ref}
                       />
@@ -214,7 +193,7 @@ export function Employees() {
                 </Controller>
 
                 <Controller
-                  name='tipoFunc'
+                  name='tipo'
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {

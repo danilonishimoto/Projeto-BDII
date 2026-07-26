@@ -1,7 +1,7 @@
 export type IClient = {
-  codCli: number;
+  id: number;
   cpf: string;
   rg: string;
-  nomeCompleto: string;
-  enderecoCliente: string;
+  nome: string;
+  endereco: string;
 }

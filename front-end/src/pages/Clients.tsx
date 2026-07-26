@@ -18,11 +18,11 @@ export function Clients() {
   const methods = useForm<IClient>({
     mode: "all",
     defaultValues: {
-      codCli: Number(id),
-      nomeCompleto: '',
+      id: Number(id),
+      nome: '',
       cpf: '',
       rg: '',
-      enderecoCliente: ''
+      endereco: ''
     },
   });
 
@@ -68,7 +68,7 @@ export function Clients() {
             <form onSubmit={handleSubmit(handleCreateAndSend)}>
               <Stack spacing={3}>
                 <Controller
-                  name='codCli'
+                  name='id'
                   disabled
                   control={control}
                   rules={{ required: "This field is required" }}
@@ -90,7 +90,7 @@ export function Clients() {
                 </Controller>
 
                 <Controller
-                  name='nomeCompleto'
+                  name='nome'
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {
@@ -154,7 +154,7 @@ export function Clients() {
                 </Controller>
 
                 <Controller
-                  name='enderecoCliente'
+                  name='endereco'
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {
