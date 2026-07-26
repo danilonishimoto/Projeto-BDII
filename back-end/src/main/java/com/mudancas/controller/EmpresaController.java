@@ -1,6 +1,7 @@
 package com.mudancas.controller;
 
 import com.mudancas.dto.EmpresaDto;
+import com.mudancas.dto.EmpresaResponseDto;
 import com.mudancas.dto.NomeQuantidadeDto;
 import com.mudancas.dto.NomeValorDto;
 import com.mudancas.service.EmpresaService;
@@ -19,6 +20,11 @@ public class EmpresaController {
     @Autowired
     public EmpresaController(EmpresaService service) {
         this.service = service;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<EmpresaResponseDto>> list() {
+        return ResponseEntity.ok(service.listAll());
     }
 
     @PostMapping

@@ -1,6 +1,7 @@
 package com.mudancas.service;
 
 import com.mudancas.dto.EmpresaDto;
+import com.mudancas.dto.EmpresaResponseDto;
 import com.mudancas.dto.NomeQuantidadeDto;
 import com.mudancas.dto.NomeValorDto;
 import com.mudancas.entity.Empresa;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpresaService {
@@ -52,5 +54,12 @@ public class EmpresaService {
 
     public List<NomeValorDto> listTop5EmpresasPorValorDeServicos() {
         return repository.listTop5EmpresasPorValorDeServicos();
+    }
+
+    public List<EmpresaResponseDto> listAll() {
+        List<Empresa> empresas = repository.findAll();
+        return empresas.stream()
+                .map(empresa -> new EmpresaResponseDto(empresa.getId(), empresa.getNome(), empresa.getEndereco(), empresa.getTelefones().stream().map(EmpresaTelefone::getTelefone).toList()))
+                .toList();
     }
 }

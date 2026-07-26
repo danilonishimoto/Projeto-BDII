@@ -1,6 +1,7 @@
 package com.mudancas.service;
 
 import com.mudancas.dto.ClienteDto;
+import com.mudancas.dto.ClienteResponseDto;
 import com.mudancas.entity.Cliente;
 import com.mudancas.entity.ClienteTelefone;
 import com.mudancas.repository.ClienteRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -18,6 +20,12 @@ public class ClienteService {
     @Autowired
     public ClienteService(ClienteRepository repository) {
         this.repository = repository;
+    }
+
+    public List<ClienteResponseDto> list() {
+        List<Cliente> clientes = repository.findAll();
+        return clientes.stream().map(cliente -> new ClienteResponseDto(cliente.getId(), cliente.getCpf(), cliente.getRg(), cliente.getNome(), cliente.getEndereco(), cliente.getTelefones().stream().map(ClienteTelefone::getTelefone).toList()))
+                .toList();
     }
 
     public ClienteDto create(ClienteDto dto) {

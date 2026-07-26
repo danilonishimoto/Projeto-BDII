@@ -5,6 +5,8 @@ import com.mudancas.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FuncionarioService {
 
@@ -17,5 +19,9 @@ public class FuncionarioService {
 
     public Funcionario create(Funcionario funcionario) {
         return repository.save(funcionario);
+    }
+
+    public List<Funcionario> list() {
+        return repository.findAll();
     }
 }
