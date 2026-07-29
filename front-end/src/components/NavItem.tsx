@@ -17,7 +17,6 @@ export function NavItem({ link, children, toggleView, activePath }: Props) {
   .toLowerCase();
 
   const isActive = Boolean(activePath.includes(formattedLink));
-  console.log(isActive)
 
   return (
     <Box 

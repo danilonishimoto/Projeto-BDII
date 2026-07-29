@@ -1,10 +1,9 @@
 import { BarChart } from "@mui/x-charts";
-import type { ICityInvestmentHistogram } from "../../types/city-investment-histogram";
 import type { ICityServiceQuantityHistogram } from "../../types/city-service-quantity-histogram";
 
 const chartSetting = {
   height: 120,
-  width: 600,
+  width: 700,
   margin: { left: 20 },
   yAxis: [
     {
@@ -15,7 +14,7 @@ const chartSetting = {
 };
 
 type Props = {
-  data: ICityInvestmentHistogram[] | ICityServiceQuantityHistogram[]
+  data?: ICityServiceQuantityHistogram[]
 }
 
 export function CityServiceQuantityHistogram({ data }: Props) {
@@ -23,8 +22,8 @@ export function CityServiceQuantityHistogram({ data }: Props) {
     <>
       <BarChart 
         dataset={data}
-        xAxis={[{ dataKey: 'faixa', categoryGapRatio: 0.1}]}
-        series={[{ dataKey: 'quantidade', label: 'Quantidade'},]}
+        xAxis={[{ dataKey: 'quantidadeServicos', categoryGapRatio: 0.1}]}
+        series={[{ dataKey: 'quantidadeCidades', label: 'Quantidade'},]}
         layout='vertical'
         {...chartSetting}
       />

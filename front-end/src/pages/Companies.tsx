@@ -5,10 +5,8 @@ import type { ICompany } from "../types/company";
 import { Box, Button, Card, CardContent, CardHeader, Divider, Stack, SvgIcon, TextField, Typography } from "@mui/material";
 import Company from '../assets/icons/business.svg?react'
 import styles from './Clients.module.css'
-import { customAlphabet } from 'nanoid';
-
-const numericId = customAlphabet('0123456789', 10);
-const id = numericId()
+import { request } from "../actions/request";
+import axiosInstance from "../helper/axiosInstance";
 
 export function Companies() {
   const navigate = useNavigate()
@@ -18,7 +16,6 @@ export function Companies() {
   const methods = useForm<ICompany>({
     mode: "all",
     defaultValues: {
-      id: Number(id),
       nome: '',
       endereco: ''
     },
@@ -26,10 +23,20 @@ export function Companies() {
 
   const { handleSubmit, control } = methods;
 
-  const handleCreateAndSend = async (data: ICompany) => {
-    setOnSend(true)
-    navigate('/')
-    console.log(data)
+  const handleCreateAndSend = async (empresa: ICompany) => {
+    const { data, error, success } = await request<ICompany>({
+      axiosInstance,
+      url: "/empresa",
+      method: "POST",
+      payload: empresa,
+    });
+    if (success) {
+      console.log(data);
+      setOnSend(true);
+      navigate("/");
+    } else {
+      console.log(error);
+    }
   }
 
   return (
@@ -65,28 +72,6 @@ export function Companies() {
           <CardContent sx={{ marginTop: 2 }}>
             <form onSubmit={handleSubmit(handleCreateAndSend)}>
               <Stack spacing={3}>
-                <Controller
-                  name='id'
-                  disabled
-                  control={control}
-                  rules={{ required: "This field is required" }}
-                  render={({ field }) => {
-                    return (
-                      <TextField
-                        slotProps={{
-                          inputLabel: {
-                            shrink: true,
-                          },
-                        }}
-                        label='Id'
-                        {...field}
-                        inputRef={field.ref}
-                      />
-                    )
-                  }}
-                >
-                </Controller>
-
                 <Controller
                   name='nome'
                   control={control}

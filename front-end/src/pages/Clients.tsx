@@ -5,10 +5,8 @@ import type { IClient } from "../types/client";
 import { Box, Button, Card, CardContent, CardHeader, Divider, Stack, SvgIcon, TextField, Typography } from "@mui/material";
 import Client from '../assets/icons/client.svg?react'
 import styles from './Clients.module.css'
-import { customAlphabet } from 'nanoid';
-
-const numericId = customAlphabet('0123456789', 10);
-const id = numericId()
+import axiosInstance from "../helper/axiosInstance";
+import { request } from "../actions/request";
 
 export function Clients() {
   const navigate = useNavigate()
@@ -18,8 +16,12 @@ export function Clients() {
   const methods = useForm<IClient>({
     mode: "all",
     defaultValues: {
+<<<<<<< HEAD
       codCli: Number(id),
       nomeCompleto: '',
+=======
+      nome: '',
+>>>>>>> 00ede60 (fix: forms)
       cpf: '',
       rg: '',
       enderecoCliente: ''
@@ -28,10 +30,20 @@ export function Clients() {
 
   const { handleSubmit, control } = methods;
 
-  const handleCreateAndSend = async (data: IClient) => {
-    setOnSend(true)
-    navigate('/')
-    console.log(data)
+  const handleCreateAndSend = async (cliente: IClient) => {
+    const { data, error, success } = await request<IClient>({
+      axiosInstance,
+      url: "/cliente",
+      method: "POST",
+      payload: cliente,
+    });
+    if (success) {
+      console.log(data);
+      setOnSend(true);
+      navigate("/");
+    } else {
+      console.log(error);
+    }
   }
 
   return (
@@ -68,6 +80,7 @@ export function Clients() {
             <form onSubmit={handleSubmit(handleCreateAndSend)}>
               <Stack spacing={3}>
                 <Controller
+<<<<<<< HEAD
                   name='codCli'
                   disabled
                   control={control}
@@ -91,6 +104,9 @@ export function Clients() {
 
                 <Controller
                   name='nomeCompleto'
+=======
+                  name='nome'
+>>>>>>> 00ede60 (fix: forms)
                   control={control}
                   rules={{ required: "This field is required" }}
                   render={({ field }) => {

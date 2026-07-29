@@ -1,4 +1,9 @@
 export type ICityInvestmentHistogram = {
-  faixa: string,
-  quantidade: number
+  nomeCidade: string,
+  pagamento: number
+}
+
+export type ICityInvestmentHistogramFormatted = {
+    faixaValor: string, 
+    quantidadeCidades: number
 }

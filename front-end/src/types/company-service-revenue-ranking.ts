@@ -1,4 +1,4 @@
 export type ICompanyServiceRevenueRanking = {
-  nomeEmpresa: string;
-  valorGanho: number;
+  nome: string;
+  valor: number;
 }

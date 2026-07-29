@@ -13,18 +13,17 @@ const settings = {
 };
 
 type Props = {
-  data: ICompanyServiceQuantityRanking[]
+  data?: ICompanyServiceQuantityRanking[]
 }
 
 
 export function CompanyServiceQuantityRanking({ data }: Props) {
 
-  const chartData = data.map((item) => {
-    return {
-      value: item.quantidade,
-      label: item.nomeEmpresa
-    }
-  })
+  const chartData = (data)?.map((item) => ({
+    label: item.nome,
+    value: item.valor,
+  })) ?? [];
+
   return (
     <>
       <PieChart

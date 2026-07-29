@@ -12,55 +12,100 @@ import { CompanyServiceQuantityRanking } from "../components/rankings/CompanySer
 import { CityServiceQuantityHistogram } from "../components/rankings/CityServiceQuantityHistogram";
 import { CityInvestmentHistogram } from "../components/rankings/CityInvestmentHistogram";
 
-import { cityServiceQuantityRankingMock } from "../assets/mocks/cityServiceQuantityRankingMock";
-import { cityInvestmentRankingMock } from "../assets/mocks/cityInvestmentRankingMock";
-import { companyServiceRevenueRankingMock } from "../assets/mocks/companyServiceRevenueRankingMock"
-import { companyServiceQuantityRankingMock } from "../assets/mocks/companyServiceQuantityRankingMock";
-import { cityInvestmentHistogramMock } from "../assets/mocks/cityInvestmentHistogramMock";
-import { cityServiceQuantityHistogramMock } from "../assets/mocks/cityServiceQuantityHistogramMock";
+import { cityInvestmentHistogramFormatter } from "../utils/cityInvestmentHistogramFormatter";
+
+import axiosInstance from "../helper/axiosInstance";
+
+import useAxios from "../actions/request";
+import type { ICityInvestmentRanking } from "../types/city-investment-ranking";
+import type { ICityServiceQuantityRanking } from "../types/city-service-quantity-ranking";
+import type { ICompanyServiceQuantityRanking } from "../types/company-service-quantity-ranking";
+import type { ICompanyServiceRevenueRanking } from "../types/company-service-revenue-ranking";
+import type { ICityServiceQuantityHistogram } from "../types/city-service-quantity-histogram";
+import type { ICityInvestmentHistogram } from "../types/city-investment-histogram";
 
 export function Home() {
+  const { data: cityInvestmentRanking } = useAxios<ICityInvestmentRanking[]>({
+    axiosInstance,
+    url: 'cidade/top-5-valor',
+    method: 'GET'
+  })
+
+  const { data: cityServiceQuantityRanking } = useAxios<ICityServiceQuantityRanking[]>({
+    axiosInstance, 
+    url: 'cidade/top-5-quantidade',
+    method: 'GET'
+  })
+
+  const { data: companyServiceQuantityRanking } = useAxios<ICompanyServiceQuantityRanking[]>({
+    axiosInstance,
+    url: 'empresa/top-5-quantidade',
+    method: 'GET'
+  })
+
+  const { data: companyServiceRevenueRanking } = useAxios<ICompanyServiceRevenueRanking[]>({
+    axiosInstance,
+    url: 'empresa/top-5-valor',
+    method: 'GET'
+  })
+
+  const { data: cityServiceQuantityHistogram } = useAxios<ICityServiceQuantityHistogram[]>({
+    axiosInstance,
+    url: 'pedido/histograma/numero-servicos',
+    method: 'GET'
+  })
+
+  const { data: cityInvestmentHistogram } = useAxios<ICityInvestmentHistogram[]>({
+    axiosInstance,
+    url: 'pedido/histograma/pagamento-servicos',
+    method: 'GET'
+  })
+
+  const cityInvestmentHistogramFormatted = cityInvestmentHistogramFormatter(cityInvestmentHistogram || [])
+
+  console.log(cityInvestmentHistogramFormatted)
+
   return (
     <Box className={styles.home}>
       <Box className={styles.head}>
-        <Box className={styles.container} style={{ marginBottom: '20px'}}>
+        <Box className={styles.container} style={{ marginBottom: '20px' }}>
           <Typography style={{ fontSize: '48px', fontWeight: 500 }}>
             Dashboard
           </Typography>
           <Typography>
-            Olá Pérez, confira abaixo as métricas solicitadas da empresa de mudanças:
+            Olá, confira abaixo as métricas solicitadas da empresa de mudanças:
           </Typography>
         </Box>
-        <Stack direction='row' spacing={2} style={{ marginBottom: '20px'}}>
+        <Stack direction='row' spacing={2} style={{ marginBottom: '20px' }}>
           <HighlightCard
-            label="Pagamento total recebido:"
-            statistic={1004.67}
+            label="Maior pagamento recebido:"
+            statistic={cityInvestmentRanking?.at(0)?.valor || 0}
           >
-            <SvgIcon component={Money}/>
+            <SvgIcon component={Money} />
           </HighlightCard>
-          <HighlightCard 
+          <HighlightCard
             label="Cidade com mais serviços:"
-            statistic='São Paulo, 34'
+            statistic={`${cityServiceQuantityRanking?.at(0)?.nome}, ${cityServiceQuantityRanking?.at(0)?.valor}`}
           >
-            <SvgIcon component={City}/>
+            <SvgIcon component={City} />
           </HighlightCard>
-          <HighlightCard 
+          <HighlightCard
             label="Empresa que mais investiu:"
-            statistic='Pérez Ltda'
+            statistic={companyServiceRevenueRanking?.at(0)?.nome || ''}
           >
-            <SvgIcon component={Service}/>
+            <SvgIcon component={Service} />
           </HighlightCard>
         </Stack>
       </Box>
-      
+
       <Box className={styles.statistics}>
         <Grid container className={styles.statisticsFirstRow} spacing={2}>
           <Grid size={6}>
             <Box className={styles.metric} style={{ padding: 0 }}>
-              <Typography style={{ padding: '16px 16px 16px 16px'}}>
+              <Typography style={{ padding: '16px 16px 16px 16px' }}>
                 Cidades com maior valor investido:
               </Typography>
-              <CityInvestmentRanking data={cityInvestmentRankingMock}/>
+              <CityInvestmentRanking data={cityInvestmentRanking ?? []} />
             </Box>
           </Grid>
           <Grid size={6}>
@@ -69,13 +114,13 @@ export function Home() {
                 <Typography>
                   Serviços por cidade:
                 </Typography>
-                <CityServiceQuantityHistogram data={cityServiceQuantityHistogramMock}/>
+                <CityServiceQuantityHistogram data={cityServiceQuantityHistogram || []} />
               </Box>
               <Box className={styles.metric}>
-                <Typography sx={{ textAlign: 'left'}}>
+                <Typography sx={{ textAlign: 'left' }}>
                   Pagamentos por cidade:
-                  <CityInvestmentHistogram data={cityInvestmentHistogramMock}/>
                 </Typography>
+                <CityInvestmentHistogram data={cityInvestmentHistogramFormatted || []} />
               </Box>
             </Stack>
           </Grid>
@@ -87,7 +132,7 @@ export function Home() {
               <Typography>
                 Cidades x serviços:
               </Typography>
-              <CityServiceQuantityRanking data={cityServiceQuantityRankingMock}/>
+              <CityServiceQuantityRanking data={cityServiceQuantityRanking || []} />
             </Box>
           </Grid>
           <Grid size={6}>
@@ -96,16 +141,16 @@ export function Home() {
                 <Typography>
                   Empresa x valor ganho:
                 </Typography>
-                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
-                  <CompanyServiceRevenueRanking data={companyServiceRevenueRankingMock}/>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <CompanyServiceRevenueRanking data={companyServiceRevenueRanking || []} />
                 </Box>
               </Box>
-              <Box className={styles.metric} sx={{ gap: 4 }}> 
+              <Box className={styles.metric} sx={{ gap: 4 }}>
                 <Typography>
                   Empresas x serviço:
                 </Typography>
-                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
-                  <CompanyServiceQuantityRanking data={companyServiceQuantityRankingMock}/>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <CompanyServiceQuantityRanking data={companyServiceQuantityRanking || []} />
                 </Box>
               </Box>
             </Stack>

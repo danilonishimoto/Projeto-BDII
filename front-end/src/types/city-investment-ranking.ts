@@ -1,5 +1,5 @@
 export type ICityInvestmentRanking = {
-  uf: string;
-  cidade: string;
-  valorInvestido: number;
+  estado: string;
+  nome: string;
+  valor: number;
 }

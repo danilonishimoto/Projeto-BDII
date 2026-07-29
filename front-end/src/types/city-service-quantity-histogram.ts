@@ -1,4 +1,4 @@
 export type ICityServiceQuantityHistogram = {
-  faixa: string, 
-  quantidade: number
+  quantidadeServicos: string, 
+  quantidadeCidades: number
 }

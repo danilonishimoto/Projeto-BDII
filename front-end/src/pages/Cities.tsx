@@ -6,6 +6,8 @@ import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
 import type { ICity } from "../types/city";
 import { useNavigate } from "react-router";
+import { request } from "../actions/request";
+import axiosInstance from "../helper/axiosInstance";
 
 export function Cities() {
   const navigate = useNavigate()
@@ -15,17 +17,27 @@ export function Cities() {
   const methods = useForm<ICity>({
     mode: "all",
     defaultValues: {
-    nome: '',
-    estado: '',
-  },
+      nome: '',
+      estado: '',
+    },
   });
 
   const { handleSubmit, control } = methods;
 
-  const handleCreateAndSend = async (data: ICity) => {
-    setOnSend(true)
-    navigate('/')
-    console.log(data)
+  const handleCreateAndSend = async (cidade: ICity) => {
+    const { data, error, success } = await request<ICity>({
+      axiosInstance,
+      url: "/cidade",
+      method: "POST",
+      payload: cidade,
+    });
+    if (success) {
+      console.log(data);
+      setOnSend(true);
+      navigate("/");
+    } else {
+      console.log(error);
+    }
   }
 
   return (

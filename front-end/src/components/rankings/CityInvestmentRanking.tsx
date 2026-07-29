@@ -3,7 +3,7 @@ import type { ICityInvestmentRanking } from '../../types/city-investment-ranking
 
 const columns: GridColDef<ICityInvestmentRanking>[] = [
   {
-    field: 'uf',
+    field: 'estado',
     headerName: 'UF',
     flex: 1,
     editable: true,
@@ -11,7 +11,7 @@ const columns: GridColDef<ICityInvestmentRanking>[] = [
     align: 'center'
   },
   {
-    field: 'cidade',
+    field: 'nome',
     headerName: 'Cidade',
     flex: 2,
     editable: true,
@@ -19,7 +19,7 @@ const columns: GridColDef<ICityInvestmentRanking>[] = [
     align: 'center'
   },
   {
-    field: 'valorInvestido',
+    field: 'valor',
     headerName: 'Valor investido',
     flex: 1,
     editable: true,
@@ -29,7 +29,7 @@ const columns: GridColDef<ICityInvestmentRanking>[] = [
 ];
 
 type Props = {
-  data: ICityInvestmentRanking[];
+  data?: ICityInvestmentRanking[] | [];
 }
 
 export function CityInvestmentRanking({ data }: Props) {
@@ -57,9 +57,7 @@ export function CityInvestmentRanking({ data }: Props) {
       columns={columns}
       hideFooter={true}
       rows={data}
-      getRowId={(row) => row.cidade}
-    >
-
-    </DataGrid>
+      getRowId={(row) => row.nome}
+    />
   )
 }

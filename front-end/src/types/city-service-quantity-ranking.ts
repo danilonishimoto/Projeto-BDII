@@ -1,4 +1,4 @@
 export type ICityServiceQuantityRanking = {
-  nomeCidade: string;
-  quantidade: number;
+  nome: string;
+  valor: number;
 }

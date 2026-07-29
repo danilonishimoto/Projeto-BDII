@@ -8,7 +8,7 @@ const chartSetting = {
 };
 
 type Props = {
-  data: ICityServiceQuantityRanking[];
+  data?: ICityServiceQuantityRanking[];
 }
 
 export function CityServiceQuantityRanking({ data }: Props) {
@@ -16,8 +16,8 @@ export function CityServiceQuantityRanking({ data }: Props) {
     <>
       <BarChart 
         dataset={data}
-        yAxis={[{ scaleType: 'band', dataKey: 'nomeCidade', width: 100 }]}
-        series={[{ dataKey: 'quantidade' }]}
+        yAxis={[{ scaleType: 'band', dataKey: 'nome', width: 100 }]}
+        series={[{ dataKey: 'valor' }]}
         layout="horizontal"
         {...chartSetting}
       />

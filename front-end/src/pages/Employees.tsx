@@ -6,6 +6,8 @@ import { Box, Button, Card, CardContent, CardHeader, Divider, InputLabel, MenuIt
 import Employee from '../assets/icons/employee.svg?react'
 import styles from './Clients.module.css'
 import { EMPLOYEE_TYPES } from "../types/enums/employeeType";
+import axiosInstance from "../helper/axiosInstance";
+import { request } from "../actions/request";
 
 export function Employees() {
   const navigate = useNavigate()
@@ -27,11 +29,21 @@ export function Employees() {
 
   const { handleSubmit, control } = methods;
 
-  const handleCreateAndSend = async (data: IEmployee) => {
-    setOnSend(true)
-    navigate('/')
-    console.log(data)
-  }
+  const handleCreateAndSend = async (funcionario: IEmployee) => {
+      const { data, error, success } = await request<IEmployee>({
+        axiosInstance,
+        url: "/funcionario",
+        method: "POST",
+        payload: funcionario,
+      });
+      if (success) {
+        console.log(data);
+        setOnSend(true);
+        navigate("/");
+      } else {
+        console.log(error);
+      }
+    }
 
   return (
     <>

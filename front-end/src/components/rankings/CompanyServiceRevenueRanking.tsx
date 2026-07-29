@@ -2,7 +2,7 @@ import { PieChart } from "@mui/x-charts"
 import type { ICompanyServiceRevenueRanking } from "../../types/company-service-revenue-ranking"
 
 type Props = {
-  data: ICompanyServiceRevenueRanking[];
+  data?: ICompanyServiceRevenueRanking[];
 }
 
 const settings = {
@@ -19,16 +19,14 @@ const settings = {
 
 export function CompanyServiceRevenueRanking({ data }: Props) {
 
-  const chartData = data.map((item) => {
-    return {
-      label: item.nomeEmpresa,
-      value: item.valorGanho
-    }
-  })
+  const chartData = (data)?.map((item) => ({
+  label: item.nome,
+  value: item.valor,
+})) || [];
 
   return (
     <>
-      <PieChart
+    <PieChart
         colors={[ '#C6F9FD', '#AED6FF', '#73AEFC', '#4D87F9', '#2563EB' ]}
         series={[{ innerRadius: 40, outerRadius: 80, data: chartData, arcLabel: 'value' }]}
         sx={{
