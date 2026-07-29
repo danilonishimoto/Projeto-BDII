@@ -20,4 +20,8 @@ public class ServicoService {
     public Servico create(Servico servico) {
         return repository.save(servico);
     }
+
+    public List<String> findAll() {
+        return repository.findAll().stream().map(Servico::getNome).toList();
+    }
 }
